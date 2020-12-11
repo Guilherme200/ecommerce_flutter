@@ -2,7 +2,6 @@ import 'package:ecommerce_flutter/providers/user_provider.dart';
 import 'package:ecommerce_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -19,6 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldState,
       resizeToAvoidBottomInset: false,
       body: Container(
         color: Colors.purple,
@@ -30,13 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 50, bottom: 50),
+                  padding: EdgeInsets.only(top: 30, bottom: 50),
                   child: Image.asset("assets/logos/logo.png",
-                      color: Colors.white, width: 200),
+                      color: Colors.white, width: 150),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
+                    controller: _emailController,
                     style: TextStyle(color: Colors.white, fontSize: 14),
                     keyboardType: TextInputType.emailAddress,
                     validator: (email) {
@@ -67,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 TextFormField(
+                  controller: _passController,
                   style: TextStyle(color: Colors.white, fontSize: 14),
                   keyboardType: TextInputType.text,
                   obscureText: isVisible,
@@ -118,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             UserProvider().login(
                                 email: _emailController.value.text,
                                 password: _passController.value.text,
-                                onError: (error) {
+                                onFail: (error) {
                                   _showError(error);
                                 },
                                 onSuccess: (message) {

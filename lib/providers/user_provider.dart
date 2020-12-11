@@ -37,7 +37,7 @@ class UserProvider extends ChangeNotifier {
       {String email,
         String password,
         Function onSuccess,
-        Function onError}) async {
+        Function onFail}) async {
     try {
       final UserCredential userCredential = await auth
           .signInWithEmailAndPassword(email: email, password: password);
@@ -48,9 +48,8 @@ class UserProvider extends ChangeNotifier {
         onSuccess("Usuário Logado ${_currentUser.id}");
       }
       notifyListeners();
-    } on FirebaseAuthException catch (e) {  print(e.message);
-      print(e.message);
-      onError(handlerError(e.code));
+    } on FirebaseAuthException catch (e) {
+      onFail(handlerError(e.code));
     }
   }
 
