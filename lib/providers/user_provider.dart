@@ -42,13 +42,13 @@ class UserProvider extends ChangeNotifier {
       final UserCredential userCredential = await auth
           .signInWithEmailAndPassword(email: email, password: password);
 
-      if (userCredential?.user != null) {
+      if (userCredential?.user != null) {  print('AQUIIII');
         _currentUser = UserModel.fromDocument(
             await _userDocument(userCredential.user.uid));
         onSuccess("Usuário Logado ${_currentUser.id}");
       }
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {  print(e.message);
       print(e.message);
       onError(handlerError(e.code));
     }
