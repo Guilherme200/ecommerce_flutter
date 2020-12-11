@@ -193,11 +193,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             _formKey.currentState.save();
                             UserProvider().register(
                               userModel,
-                              onFail: (erro) {
-                                print('dedededed');
+                              onFail: (error) {
+                                print(error);
+                                _showError('Erro ao cadastar usuário!');
                               },
                               onSuccess: () {
-                                print("Cadastro Realizado com Sucesso");
+                                _showSuccess("Cadastro Realizado com Sucesso");
+                                // Navigator.of(context).pop();
                               },
                             );
                           }
@@ -213,6 +215,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
+      ),
+    );
+  }
+  _showError(String message) {
+    _scaffoldState.currentState.showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.red,
+        content: Container(color: Colors.red, child: Text(message)),
+      ),
+    );
+  }
+
+  _showSuccess(String message) {
+    _scaffoldState.currentState.showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.green,
+        content: Container(color: Colors.green, child: Text(message)),
       ),
     );
   }
