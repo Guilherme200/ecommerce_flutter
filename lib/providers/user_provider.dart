@@ -63,16 +63,12 @@ class UserProvider extends ChangeNotifier {
           password: userModel.password
       );
 
-      print('aeeee  ' + userCredential.user.uid);
-
       userModel.id = userCredential.user.uid;
 
       await _firestore.doc(userModel.id).set(userModel.toMap());
-
-      // print(userCredential.user.uid);
       onSuccess();
     } on FirebaseAuthException catch (e) {
-      onFail('erroo: ' + handlerError(e.code));
+      onFail(handlerError(e.code));
     }
   }
 

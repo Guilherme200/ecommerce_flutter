@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/models/user_model.dart';
 import 'package:ecommerce_flutter/providers/user_provider.dart';
+import 'package:ecommerce_flutter/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -107,10 +108,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     style: TextStyle(color: Colors.white, fontSize: 14),
-                    validator: (name) {
-                      if (name.isEmpty) {
-                        return "Campo Obrigatório!";
-                      }
+                    validator: (email) {
+                      RegExp _regex = new RegExp(Constants.REGEX_EMAIL);
+
+                      if (email.isEmpty || !_regex.hasMatch(email))
+                        return "E-mail inválido";
 
                       return null;
                     },
@@ -195,10 +197,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               userModel,
                               onFail: (error) {
                                 print(error);
-                                _showError('Erro ao cadastar usuário!');
+                                _showError(error);
                               },
                               onSuccess: () {
-                                _showSuccess("Cadastro Realizado com Sucesso");
+                                _showSuccess("Cadastro realizado com sucesso!");
                                 // Navigator.of(context).pop();
                               },
                             );
