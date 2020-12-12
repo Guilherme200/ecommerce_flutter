@@ -1,5 +1,6 @@
 import 'package:ecommerce_flutter/models/product_model.dart';
 import 'package:ecommerce_flutter/providers/product_provider.dart';
+import 'package:ecommerce_flutter/widgets/product/product_field.dart';
 import 'package:ecommerce_flutter/widgets/product/search_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -63,7 +64,7 @@ class ProductsScreen extends StatelessWidget {
                 childAspectRatio: 200 / 330,
               ),
               itemBuilder: (context, index) {
-                // return ProductGridItem(_products[index]);
+                return ProductItem(_products[index]);
               },
             )
           ],
