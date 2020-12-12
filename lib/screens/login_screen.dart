@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                                 onSuccess: (message) {
                                   _showSuccess(message);
-                                  // Navigator.of(context).pop();
+                                  Navigator.pushNamed(context, '/home');
                                 });
                           }
                         },
