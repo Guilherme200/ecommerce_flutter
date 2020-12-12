@@ -1,4 +1,4 @@
-import 'package:ecommerce_flutter/utils/constants.dart';
+import 'package:ecommerce_flutter/screens/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: [
-          // ProductGrid(),
+          ProductsScreen(),
           // CartBody(),
           // UserPageView(),
         ],
